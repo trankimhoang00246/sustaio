@@ -20,11 +20,13 @@ public class AppConfig {
     public void initApp() {
         if(!roleRepository.existsRoleByName("ROLE_ADMIN"))
             roleRepository.save(Role.builder().id(1L).name("ROLE_ADMIN").build());
-        if(!roleRepository.existsRoleByName("ROLE_USER"))
-            roleRepository.save(Role.builder().id(2L).name("ROLE_USER").build());
+        if(!roleRepository.existsRoleByName("ROLE_FARMER"))
+            roleRepository.save(Role.builder().id(2L).name("ROLE_FARMER").build());
+        if(!roleRepository.existsRoleByName("ROLE_ENTERPRISE"))
+            roleRepository.save(Role.builder().id(3L).name("ROLE_ENTERPRISE").build());
 
         Role adminRole = roleRepository.findById(1L).get();
-        Role userRole = roleRepository.findById(2L).get();
+        Role farmerRole = roleRepository.findById(2L).get();
         if(!userRepository.existsByUsername("admin")) {
             userRepository.save(
                     User.builder()
@@ -34,13 +36,13 @@ public class AppConfig {
                             .role(adminRole)
                             .build());
         }
-        if(!userRepository.existsByUsername("user")) {
+        if(!userRepository.existsByUsername("farmer")) {
             userRepository.save(
                     User.builder()
-                            .name("User")
-                            .username("user")
-                            .password(passwordEncoder.encode("user"))
-                            .role(userRole)
+                            .name("Farmer")
+                            .username("farmer")
+                            .password(passwordEncoder.encode("farmer"))
+                            .role(farmerRole)
                             .build());
         }
     }
