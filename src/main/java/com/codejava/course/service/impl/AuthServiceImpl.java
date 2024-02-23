@@ -40,15 +40,12 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String register(RegisterForm form) {
-        if (!roleRepository.existsRoleByName("ROLE_USER")) {
-            var role = Role.builder()
-                    .name("ROLE_USER")
-                    .build();
-            roleRepository.save(role);
+        if (userRepository.existsByUsername(form.getUsername())) {
+            throw new IllegalArgumentException("Username already exists");
         }
 
-        Role role = roleRepository.findByName("ROLE_USER")
-                .orElseThrow(() -> new IllegalArgumentException("Not found ROLE_USER"));
+        Role role = roleRepository.findByName("ROLE_FARMER")
+                .orElseThrow(() -> new IllegalArgumentException("Not found role ROLE_FARMER"));
 
         var user = User.builder()
                 .username(form.getUsername())
@@ -63,9 +60,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthDto refreshJWT(String refreshToken) {
-        if( refreshToken != null ){
+        if (refreshToken != null) {
             refreshToken = refreshToken.replaceFirst("Bearer ", "");
-            if(jwtService.validateRefreshToken(refreshToken) ){
+            if (jwtService.validateRefreshToken(refreshToken)) {
                 Authentication auth = jwtService.createAuthentication(refreshToken);
                 return AuthDto.from(auth, jwtService.generateAccessToken(auth), refreshToken);
             }
