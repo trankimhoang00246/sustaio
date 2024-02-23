@@ -1,0 +1,35 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gdsc2024
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  security:
+    jwt:
+      access-expires-at: 900_000 #ms -15ph
+      refresh-expires-at: 2_592_000_000 #30day
+      prefix: "Bearer "
+      auth-header: "Authorization"
+      access-secret: access
+      refresh-secret: refresh
+  api:
+    title: Sustaio APIs
+    version: 1.0.0
+    description: "[Team Kìn Chá Nà - GDSC 2024] Sustaio: Nông nghiệp bền vững"
+    contact-name: Kìn Chá nà
+    contact-email: trankimhoang1710@gmail.com
+    swagger:
+      enable: true
