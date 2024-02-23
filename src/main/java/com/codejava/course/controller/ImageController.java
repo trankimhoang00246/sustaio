@@ -1,5 +1,6 @@
 package com.codejava.course.controller;
 
+import com.codejava.course.model.dto.ImageUrlDto;
 import com.codejava.course.model.entity.Image;
 import com.codejava.course.repository.ImageRepository;
 import com.codejava.course.utils.AppUtils;
@@ -34,7 +35,9 @@ public class ImageController {
                     .data(ImageUtils.compressImage(file.getBytes())).build());
 
             String imageUrl = appUtils.getBaseUrlApi() + "/api/v1/image/get/" + image.getId();
-            return new ResponseEntity(imageUrl, HttpStatus.OK);
+            return new ResponseEntity(ImageUrlDto.builder()
+                    .imageUrl(imageUrl)
+                    .build(), HttpStatus.OK);
         } else {
             return new ResponseEntity("File is not an image", HttpStatus.BAD_REQUEST);
         }
