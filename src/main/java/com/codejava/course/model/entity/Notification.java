@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "notifications")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post extends BaseEntity {
+public class Notification extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,5 +20,5 @@ public class Post extends BaseEntity {
     private String content;
     private String imageUrl;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Category category;
+    private User user;
 }
