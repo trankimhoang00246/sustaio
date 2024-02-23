@@ -7,16 +7,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "categories")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Role extends BaseEntity {
+public class Category extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;
-
 }

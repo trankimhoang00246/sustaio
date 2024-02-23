@@ -4,6 +4,7 @@ import com.codejava.course.model.dto.AuthDto;
 import com.codejava.course.model.form.LoginForm;
 import com.codejava.course.model.form.RegisterForm;
 import com.codejava.course.service.AuthService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +19,17 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthDto login(@RequestBody LoginForm form){
-        return authService.login(form);
+    public ResponseEntity login(@RequestBody LoginForm form){
+        return ResponseEntity.ok(authService.login(form));
     }
 
     @PostMapping("/register")
-    public String login(@RequestBody RegisterForm form){
-        return authService.register(form);
+    public ResponseEntity<String> login(@RequestBody RegisterForm form){
+        return ResponseEntity.ok(authService.register(form));
     }
 
     @GetMapping("/refresh")
-    public AuthDto refreshToken(@RequestHeader("X-Refresh-Token") String refreshToken){
-        return authService.refreshJWT(refreshToken);
+    public ResponseEntity refreshToken(@RequestHeader("X-Refresh-Token") String refreshToken){
+        return ResponseEntity.ok(authService.refreshJWT(refreshToken));
     }
 }
