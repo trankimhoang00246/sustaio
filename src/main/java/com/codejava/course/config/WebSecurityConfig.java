@@ -7,12 +7,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableMethodSecurity
@@ -47,6 +50,15 @@ public class WebSecurityConfig {
                                 .requestMatchers("/webjars/**").permitAll()
                                 .requestMatchers("/swagger-ui.html").permitAll()
                                 .anyRequest().authenticated()
+                )
+                .cors(cors -> cors
+                        .configurationSource(request -> {
+                            CorsConfiguration cfg = new CorsConfiguration();
+                            cfg.setAllowedOrigins(Collections.singletonList("*"));
+                            cfg.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                            cfg.setAllowedHeaders(Arrays.asList("*"));
+                            return cfg;
+                        })
                 )
                 .build();
     }
