@@ -35,7 +35,10 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = jwtService.generateAccessToken(authentication);
         String refreshToken = jwtService.generateRefreshToken(authentication);
 
-        return AuthDto.from(authentication, accessToken, refreshToken);
+        User user = userRepository.findByUsername(form.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + form.getUsername()));
+
+        return AuthDto.from(user, accessToken, refreshToken);
     }
 
     @Override
@@ -64,7 +67,10 @@ public class AuthServiceImpl implements AuthService {
             refreshToken = refreshToken.replaceFirst("Bearer ", "");
             if (jwtService.validateRefreshToken(refreshToken)) {
                 Authentication auth = jwtService.createAuthentication(refreshToken);
-                return AuthDto.from(auth, jwtService.generateAccessToken(auth), refreshToken);
+
+                User user = userRepository.findByUsername(auth.getName())
+                        .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + auth.getName()));
+                return AuthDto.from(user, jwtService.generateAccessToken(auth), refreshToken);
             }
         }
         throw new InvalidRefreshTokenException(refreshToken);
