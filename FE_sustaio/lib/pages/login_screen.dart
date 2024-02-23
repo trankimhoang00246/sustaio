@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gdsc_2024/backgrounds/login_background.dart';
+import 'package:gdsc_2024/backgrounds/authen_background.dart';
 import 'package:gdsc_2024/components/login_item.dart';
 import 'package:gdsc_2024/utils/app_styles.dart';
 
@@ -13,12 +13,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: AppStyles.primaryColor1,
       body: Stack(
         children: [
-          LoginBackground(),
-          LoginItem(),
+          AuthenBackground(additionalWidget: LoginItem()),
         ],
       ),
     );

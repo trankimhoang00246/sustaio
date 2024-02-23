@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_2024/backgrounds/home_background.dart';
+import 'package:gdsc_2024/pages/home_screen.dart';
 import 'package:gdsc_2024/pages/onboarding_screen.dart';
 import 'package:gdsc_2024/utils/app_styles.dart';
 
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: OnboardingScreen(),
+        body: HomeBackground(),
       ),
     );
   }

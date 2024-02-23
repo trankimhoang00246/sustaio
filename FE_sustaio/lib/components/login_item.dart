@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdsc_2024/backgrounds/home_background.dart';
 import 'package:gdsc_2024/utils/app_styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,21 +32,14 @@ class _LoginItemState extends State<LoginItem> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(height: 0.07 * deviceHeight),
-              _buildInputForm(context, usernameController),
-              SizedBox(height: 0.01 * deviceHeight),
-              _buildInputForm(context, passwordController, isPassword: true),
-              _buildRowSupport(),
-              _buildButton(),
-              _buildTextNavigator(),
-              SizedBox(height: 0.07 * deviceHeight),
-            ],
-          ),
-        ),
+        SizedBox(height: 0.07 * deviceHeight),
+        _buildInputForm(context, usernameController),
+        SizedBox(height: 0.01 * deviceHeight),
+        _buildInputForm(context, passwordController, isPassword: true),
+        _buildRowSupport(),
+        _buildButton(),
+        _buildTextNavigator(),
+        SizedBox(height: 0.07 * deviceHeight),
       ],
     );
   }
@@ -101,6 +95,12 @@ class _LoginItemState extends State<LoginItem> {
         child: GestureDetector(
           onTap: () {
             print('Sign in button was pressed');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeBackground(),
+              ),
+            );
           },
           child: Text(
             "Sign in",
