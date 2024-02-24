@@ -55,7 +55,7 @@ public class JwtService {
                 return false;
 
             String tokenRole = jwt.getClaim("role").asString();
-            return Objects.equals(user.getRole().toString(),  tokenRole);
+            return Objects.equals(user.getRole().getName(), tokenRole);
     }
 
     public boolean validateRefreshToken(String token){
