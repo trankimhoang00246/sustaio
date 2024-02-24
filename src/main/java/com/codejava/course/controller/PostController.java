@@ -25,4 +25,9 @@ public class PostController {
     public ResponseEntity getById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(postService.getById(id));
     }
+
+    @GetMapping("/newest")
+    public ResponseEntity get5NewestPosts() {
+        return ResponseEntity.ok(postService.get5NewestPosts());
+    }
 }

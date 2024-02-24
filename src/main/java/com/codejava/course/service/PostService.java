@@ -8,4 +8,5 @@ public interface PostService {
     List<PostDto> getAll();
     List<PostDto> getAllByCategoryName(String name);
     PostDto getById(Long id);
+    List<PostDto> get5NewestPosts();
 }

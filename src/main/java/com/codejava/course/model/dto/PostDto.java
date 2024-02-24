@@ -4,6 +4,8 @@ import com.codejava.course.model.entity.Post;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Data
 public class PostDto {
@@ -12,6 +14,8 @@ public class PostDto {
     private String content;
     private String imageUrl;
     private CategoryDto categoryDto;
+    protected LocalDateTime createdAt;
+    protected LocalDateTime updatedAt;
 
     public static PostDto from(Post post) {
         return PostDto.builder()
@@ -20,6 +24,8 @@ public class PostDto {
                 .content(post.getContent())
                 .imageUrl(post.getImageUrl())
                 .categoryDto(CategoryDto.from(post.getCategory()))
+                .createdAt(post.getCreatedAt())
+                .updatedAt(post.getUpdatedAt())
                 .build();
     }
 }
