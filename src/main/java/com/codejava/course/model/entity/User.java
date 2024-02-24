@@ -26,6 +26,7 @@ public class User extends BaseEntity implements UserDetails {
     private String username;
     private String password;
     private String name;
+    private String avatarUrl;
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;
 
