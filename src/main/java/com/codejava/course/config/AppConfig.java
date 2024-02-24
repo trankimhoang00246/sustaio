@@ -30,6 +30,7 @@ public class AppConfig {
 
         Role adminRole = roleRepository.findById(1L).get();
         Role farmerRole = roleRepository.findById(2L).get();
+        Role enterpriseRole = roleRepository.findById(3L).get();
         if(!userRepository.existsByUsername("admin")) {
             userRepository.save(
                     User.builder()
@@ -42,7 +43,7 @@ public class AppConfig {
         if(!userRepository.existsByUsername("farmer")) {
             userRepository.save(
                     User.builder()
-                            .name("Farmer")
+                            .name("Farmer A")
                             .username("farmer")
                             .password(passwordEncoder.encode("farmer"))
                             .role(farmerRole)
@@ -51,10 +52,10 @@ public class AppConfig {
         if(!userRepository.existsByUsername("enterprise")) {
             userRepository.save(
                     User.builder()
-                            .name("Enterprise")
+                            .name("Enterprise A")
                             .username("enterprise")
                             .password(passwordEncoder.encode("enterprise"))
-                            .role(farmerRole)
+                            .role(enterpriseRole)
                             .build());
         }
         log.info("Users initialized successfully");
