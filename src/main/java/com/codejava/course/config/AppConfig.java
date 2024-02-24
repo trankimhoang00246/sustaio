@@ -5,12 +5,14 @@ import com.codejava.course.model.entity.User;
 import com.codejava.course.repository.RoleRepository;
 import com.codejava.course.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
+@Log4j2
 public class AppConfig {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
@@ -24,6 +26,7 @@ public class AppConfig {
             roleRepository.save(Role.builder().id(2L).name("ROLE_FARMER").build());
         if(!roleRepository.existsRoleByName("ROLE_ENTERPRISE"))
             roleRepository.save(Role.builder().id(3L).name("ROLE_ENTERPRISE").build());
+        log.info("Roles initialized successfully");
 
         Role adminRole = roleRepository.findById(1L).get();
         Role farmerRole = roleRepository.findById(2L).get();
@@ -45,5 +48,15 @@ public class AppConfig {
                             .role(farmerRole)
                             .build());
         }
+        if(!userRepository.existsByUsername("enterprise")) {
+            userRepository.save(
+                    User.builder()
+                            .name("Enterprise")
+                            .username("enterprise")
+                            .password(passwordEncoder.encode("enterprise"))
+                            .role(farmerRole)
+                            .build());
+        }
+        log.info("Users initialized successfully");
     }
 }

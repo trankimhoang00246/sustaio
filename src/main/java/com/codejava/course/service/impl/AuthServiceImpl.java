@@ -11,6 +11,7 @@ import com.codejava.course.repository.UserRepository;
 import com.codejava.course.security.JwtService;
 import com.codejava.course.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -38,6 +40,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByUsername(form.getUsername())
                 .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + form.getUsername()));
 
+        log.info("User {} logged in", user.getUsername());
         return AuthDto.from(user, accessToken, refreshToken);
     }
 
@@ -58,6 +61,8 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
+
+        log.info("User {} registered", user.getUsername());
         return "Success register new user";
     }
 
@@ -70,6 +75,8 @@ public class AuthServiceImpl implements AuthService {
 
                 User user = userRepository.findByUsername(auth.getName())
                         .orElseThrow(() -> new IllegalArgumentException("User not found with username: " + auth.getName()));
+
+                log.info("User {} refreshed token", user.getUsername());
                 return AuthDto.from(user, jwtService.generateAccessToken(auth), refreshToken);
             }
         }

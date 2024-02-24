@@ -11,12 +11,14 @@ import com.codejava.course.repository.UserRepository;
 import com.codejava.course.service.CollabRequestService;
 import com.codejava.course.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class CollabRequestServiceImpl implements CollabRequestService {
     private final CollabRequestRepository collabRequestRepository;
     private final UserRepository userRepository;
@@ -32,7 +34,10 @@ public class CollabRequestServiceImpl implements CollabRequestService {
         CollabRequest collabRequest = CollabRequestForm.toEntity(collabRequestForm);
         collabRequest.setCollab(collab);
         collabRequest.setUser(user);
-        return CollabRequestDto.from(collabRequestRepository.save(collabRequest));
+
+        CollabRequest collabRequestCreated = collabRequestRepository.save(collabRequest);
+        log.info("Collab Request with id {} created successfully", collabRequestCreated.getId());
+        return CollabRequestDto.from(collabRequestCreated);
     }
 
     @Override
@@ -44,6 +49,8 @@ public class CollabRequestServiceImpl implements CollabRequestService {
             throw new IllegalArgumentException("You don't have permission to delete this collab request");
         }
         collabRequestRepository.deleteById(id);
+
+        log.info("Collab Request with id {} deleted successfully", id);
         return "Collab Request deleted successfully";
     }
 
@@ -75,6 +82,8 @@ public class CollabRequestServiceImpl implements CollabRequestService {
             CollabRequest collabRequest = collabRequestRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Collab Request not found with id: " + id));
             collabRequest.setStatus(status);
+
+            log.info("Collab Request with id {} updated status to {} successfully", id, status);
             return CollabRequestDto.from(collabRequestRepository.save(collabRequest));
         }
         else {
