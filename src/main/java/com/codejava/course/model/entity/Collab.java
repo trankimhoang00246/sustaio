@@ -16,8 +16,11 @@ public class Collab extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 1000000)
     private String content;
+    @Column(length = 1000000)
     private String otherContent;
+    @Column(length = 1000000)
     private String descEnterprise;
     private String address;
     private Boolean verified;

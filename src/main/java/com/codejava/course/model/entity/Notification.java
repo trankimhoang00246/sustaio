@@ -17,6 +17,7 @@ public class Notification extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Column(length = 1000000)
     private String content;
     private String imageUrl;
     @ManyToOne(fetch = FetchType.EAGER)
