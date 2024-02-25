@@ -2,6 +2,7 @@ package com.codejava.course.controller;
 
 import com.codejava.course.model.form.CollabRequestForm;
 import com.codejava.course.service.CollabRequestService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class CollabRequestController {
     }
 
     @PostMapping
-    public ResponseEntity createCollabRequest(@RequestBody CollabRequestForm collabRequestForm) {
+    public ResponseEntity createCollabRequest(@Valid @RequestBody  CollabRequestForm collabRequestForm) {
         return ResponseEntity.ok(collabRequestService.createCollabRequest(collabRequestForm));
     }
 

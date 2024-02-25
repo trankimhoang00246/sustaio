@@ -1,11 +1,10 @@
 package com.codejava.course.controller;
 
-import com.codejava.course.model.dto.AuthDto;
 import com.codejava.course.model.form.LoginForm;
 import com.codejava.course.model.form.RegisterForm;
 import com.codejava.course.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> login(@RequestBody RegisterForm form){
+    public ResponseEntity<String> login(@RequestBody @Valid RegisterForm form){
         return ResponseEntity.ok(authService.register(form));
     }
 
