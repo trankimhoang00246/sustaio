@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_2024/backgrounds/home_background.dart';
+<<<<<<< HEAD
 import 'package:gdsc_2024/pages/collabdetails_screen.dart';
+=======
+import 'package:gdsc_2024/pages/apply_collab_screen.dart';
+>>>>>>> 34ba126c3e0992a53537dedcd59354c00257cb46
 import 'package:gdsc_2024/pages/home_screen.dart';
 import 'package:gdsc_2024/pages/onboarding_screen.dart';
 import 'package:gdsc_2024/utils/app_styles.dart';
+import 'package:gdsc_2024/utils/data_collab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +19,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+<<<<<<< HEAD
         body: CollabDetailsScreen(),
+=======
+        body: ApllyCollabScreen(
+          collab: collabList[0],
+        ),
+>>>>>>> 34ba126c3e0992a53537dedcd59354c00257cb46
       ),
     );
   }
