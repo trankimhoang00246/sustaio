@@ -62,7 +62,7 @@ public class AppConfig {
             userRepository.save(
                     User.builder()
                             .id(3L)
-                            .name("Tổng Công Ty Lương Thực Miền Nam")
+                            .name("Southern Food Corporation")
                             .username("enterprise1")
                             .password(passwordEncoder.encode("enterprise"))
                             .role(enterpriseRole)
@@ -73,7 +73,7 @@ public class AppConfig {
             userRepository.save(
                     User.builder()
                             .id(4L)
-                            .name("Tổng Công Ty Cổ Phần Thương Mại Lương Thực Thực Phẩm Hà Nội")
+                            .name("The Hanoi Foodstuff and Food Trading Joint Stock Company")
                             .username("enterprise2")
                             .password(passwordEncoder.encode("enterprise"))
                             .role(enterpriseRole)
@@ -83,8 +83,8 @@ public class AppConfig {
         log.info("Users initialized successfully");
 
         for(int i = 1; i <= 10; i++) {
-            String title = "Thông báo " + i;
-            String message = "Nội dung thông báo " + i;
+            String title = "Notification " + i;
+            String message = "Notification content " + i;
             notificationRepository.save(
                     Notification.builder()
                             .title(title)
@@ -95,24 +95,23 @@ public class AppConfig {
         }
         log.info("Notifications initialized successfully");
 
-        Category category1 = categoryRepository.save(Category.builder().id(1L).name("Rau củ").build());
-        Category category2 =  categoryRepository.save(Category.builder().id(2L).name("Trái cây").build());
-        Category category3 = categoryRepository.save(Category.builder().id(3L).name("Thủy sản").build());
-        Category category4 = categoryRepository.save(Category.builder().id(4L).name("Gia súc").build());
-        Category category5 = categoryRepository.save(Category.builder().id(5L).name("Gia cầm").build());
-        Category category6 = categoryRepository.save(Category.builder().id(6L).name("Nguyên liệu chế biến").build());
-        Category category7 = categoryRepository.save(Category.builder().id(7L).name("Cây công nghiệp").build());
-        Category category8 = categoryRepository.save(Category.builder().id(8L).name("Cây lâm nghiệp").build());
-        Category category9 = categoryRepository.save(Category.builder().id(9L).name("Cây dược liệu").build());
-        Category category10 = categoryRepository.save(Category.builder().id(10L).name("Cây ăn quả").build());
+        Category category1 = categoryRepository.save(Category.builder().id(1L).name("Vegetables").build());
+        Category category2 =  categoryRepository.save(Category.builder().id(2L).name("Fruits").build());
+        Category category3 = categoryRepository.save(Category.builder().id(3L).name("Seafood").build());
+        Category category4 = categoryRepository.save(Category.builder().id(4L).name("Livestock").build());
+        Category category5 = categoryRepository.save(Category.builder().id(5L).name("Poultry").build());
+        Category category6 = categoryRepository.save(Category.builder().id(6L).name("Processing Ingredients").build());
+        Category category7 = categoryRepository.save(Category.builder().id(7L).name("Industrial Plants").build());
+        Category category8 = categoryRepository.save(Category.builder().id(8L).name("Forestry Plants").build());
+        Category category9 = categoryRepository.save(Category.builder().id(9L).name("Medicinal Plants").build());
+        Category category10 = categoryRepository.save(Category.builder().id(10L).name("Fruit Trees").build());
         log.info("Categories initialized successfully");
-
 
         for(Long i = 1L; i <= 10L; i++) {
             for (Long j =1L; j <= 20L; j++) {
                 Category categoryPost = categoryRepository.findById(i).get();
-                String title = "Bài viết " + j + " - " + categoryPost.getName();
-                String message = "Nội dung bài viết " + j;
+                String title = "Post " + j + " - " + categoryPost.getName();
+                String message = "Post content " + j;
                 postRepository.save(
                         Post.builder()
                                 .id((long) (i * 10 + j))
@@ -128,17 +127,12 @@ public class AppConfig {
         Collab collab1 = collabRepository.save(
                 Collab.builder()
                         .id(1L)
-                        .content("Tên Công Ty: Tổng Công Ty Lương Thực Miền Nam\n" +
-                                "Lĩnh Vực Hoạt Động: Lương thực và thực phẩm\n" +
-                                "Mục Tiêu Kinh Doanh: Tổng Công Ty Lương Thực Miền Nam có thể có mục tiêu cung cấp sản phẩm lương thực chất lượng và đa dạng để đáp ứng nhu cầu người tiêu dùng. Công ty có thể cam kết đảm bảo chất lượng sản phẩm và duy trì mối quan hệ tốt với nhà cung ứng và đối tác kinh doanh.\n" +
-                                "Phạm Vi Hoạt Động: Có thể mô tả về phạm vi địa lý mà công ty phục vụ, có phải là quốc gia, khu vực hay quốc tế không.\n" +
-                                "Sản Phẩm và Dịch Vụ: Nêu rõ những sản phẩm và dịch vụ chính mà công ty cung cấp. Điều này có thể bao gồm các loại lương thực như gạo, ngũ cốc, bột mì, và các sản phẩm liên quan.\n" +
-                                "Chất Lượng và An Toàn Thực Phẩm: Tổng Công Ty Lương Thực Miền Nam có thể chú trọng vào việc duy trì các tiêu chuẩn chất lượng cao và đảm bảo an toàn thực phẩm cho khách hàng.\n" +
-                                "Giá Trị Cốt Lõi: Mô tả về giá trị cốt lõi của công ty, có thể là sự cam kết về bền vững, chất lượng, sáng tạo, hoặc những giá trị cụ thể khác.\n" +
-                                "Lịch Sử và Phát Triển: Tóm tắt lịch sử phát triển của công ty, bao gồm những thành tựu lớn và các sự kiện quan trọng trong quá khứ.")
+                        .content("Company Name: Southern Food Corporation\n" +
+                                "Field of Operation: Grains and Foodstuffs\n" +
+                                "History and Development: Summarize the company's history and development, highlighting significant achievements and important events in the past.")
                         .otherContent("")
-                        .descEnterprise("Tổng công ty Lương thực miền Nam là một trong những Doanh nghiệp kinh doanh lúa gạo lớn trên thế giới với mức chế biến và xuất khẩu bình quân hàng năm đạt khoảng 2,8 – 3,0 triệu tấn gạo, kim ngạch xuất khẩu hàng năm trên 1 tỷ USD, doanh số trên 30.000 tỷ đồng.")
-                        .address("36 Tân Chánh Hiệp 18, Tân Chánh Hiệp,  Quận 12, TP. Hồ Chí Minh, Việt Nam")
+                        .descEnterprise("Southern Food Corporation is one of the major rice processing and exporting enterprises globally, with an annual processing and export volume of approximately 2.8 – 3.0 million tons of rice, and an annual export turnover exceeding 1 billion USD, with sales over 30,000 billion VND.")
+                        .address("36 Tan Chanh Hiep 18, Tan Chanh Hiep, District 12, Ho Chi Minh City, Vietnam")
                         .verified(true)
                         .category(category2)
                         .coverImageUrl("https://i.pinimg.com/564x/d9/38/7e/d9387e57f33bb10595442deb4819651b.jpg")
@@ -148,29 +142,13 @@ public class AppConfig {
         Collab collab2 = collabRepository.save(
                 Collab.builder()
                         .id(2L)
-                        .content("Tên Công Ty: Tổng Công Ty Cổ Phần Thương Mại Lương Thực Thực Phẩm Hà Nội\n" +
-                                "Lĩnh Vực Hoạt Động: Cung cấp và thương mại các sản phẩm lương thực và thực phẩm.\n" +
-                                "Tầm Nhìn và Sứ Mệnh:\n" +
-                                "Tầm Nhìn: Trở thành đối tác đáng tin cậy hàng đầu trong lĩnh vực lương thực và thực phẩm tại Việt Nam và khu vực.\n" +
-                                "Sứ Mệnh: Mang lại những sản phẩm lương thực chất lượng cao, an toàn và dinh dưỡng cho cộng đồng, đồng thời xây dựng mối quan hệ đối tác bền vững với các đối tác kinh doanh.\n" +
-                                "Danh Mục Sản Phẩm và Dịch Vụ:\n" +
-                                "Cung cấp và phân phối các loại gạo, ngũ cốc, bột mì, thực phẩm chế biến sẵn, và các sản phẩm lương thực đa dạng.\n" +
-                                "Dịch vụ nhập khẩu và xuất khẩu lương thực để đáp ứng nhu cầu thị trường quốc tế.\n" +
-                                "Chất Lượng và An Toàn Thực Phẩm:\n" +
-                                "Tuân thủ nghiêm ngặt các tiêu chuẩn chất lượng và an toàn thực phẩm quốc tế.\n" +
-                                "Sử dụng quy trình kiểm soát chất lượng hiện đại và công nghệ tiên tiến để đảm bảo sản phẩm đáp ứng hoặc vượt qua các yêu cầu khắt khe.\n" +
-                                "Bền Vững và Trách Nhiệm Xã Hội:\n" +
-                                "Cam kết đối với các hoạt động bền vững và bảo vệ môi trường.\n" +
-                                "Tham gia vào các hoạt động xã hội như cung ứng lương thực cho cộng đồng nghèo, hỗ trợ giáo dục, và các dự án xã hội khác.\n" +
-                                "Đối Tác và Mối Quan Hệ:\n" +
-                                "Xây dựng mối quan hệ đối tác đáng tin cậy và lâu dài với những đối tác cung ứng và khách hàng.\n" +
-                                "Hợp tác chặt chẽ với các đối tác để đảm bảo chuỗi cung ứng ổn định và đáng tin cậy.\n" +
-                                "Lịch Sử và Thành Tựu:\n" +
-                                "Thành lập với truyền thống lâu dài và kinh nghiệm trong ngành lương thực và thực phẩm.\n" +
-                                "Đã đạt được những thành công lớn trong việc mở rộng quy mô kinh doanh và mở rộng quốc tế.")
-                        .otherContent("Liên hệ với chúng tôi để biết thêm thông tin chi tiết về cách thức hợp tác và các sản phẩm cung cấp.")
-                        .descEnterprise("Tổng Công Ty Cổ Phần Thương Mại Lương Thực Thực Phẩm Hà Nội có thể có mục tiêu cung cấp sản phẩm lương thực chất lượng và đa dạng để đáp ứng nhu cầu người tiêu dùng. Công ty có thể cam kết đảm bảo chất lượng sản phẩm và duy trì mối quan hệ tốt với nhà cung ứng và đối tác kinh doanh.")
-                        .address("720A Đ. Điện Biên Phủ, Vinhomes Tân Cảng, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam")
+                        .content("Company Name: The Hanoi Foodstuff and Food Trading Joint Stock Company\n" +
+                                "Field of Operation: Supplying and trading grains and foodstuffs.\n" +
+                                "History and Achievements:\n" +
+                                "Established with a long-standing tradition and experience in the field of food and foodstuff.")
+                        .otherContent("Contact us for more detailed information on collaboration methods and the products we provide.")
+                        .descEnterprise("The Hanoi Foodstuff and Food Trading Joint Stock Company may aim to provide high-quality and diverse grain products to meet consumer demands. The company may commit to ensuring product quality and maintaining good relationships with suppliers and business partners.")
+                        .address("720A Dien Bien Phu Street, Vinhomes Tan Cang, Binh Thanh District, Ho Chi Minh City, Vietnam")
                         .verified(true)
                         .category(category6)
                         .coverImageUrl("https://i.pinimg.com/564x/5a/02/a4/5a02a41c0aeed1836f6502847008535b.jpg")
@@ -182,11 +160,11 @@ public class AppConfig {
         CollabRequest collabRequest = collabRequestRepository.save(
                 CollabRequest.builder()
                         .id(1L)
-                        .fullName("Nguyễn Văn A")
+                        .fullName("Nguyen Van A")
                         .email("kinchana@gmail.com")
                         .phone("0123456789")
-                        .address("02 Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh, Việt Nam")
-                        .description("Tôi muốn hợp tác với Tổng Công Ty Lương Thực Miền Nam để cung cấp sản phẩm lương thực của mình.")
+                        .address("02 Vo Oanh, Ward 25, Binh Thanh District, Ho Chi Minh City, Vietnam")
+                        .description("I want to collaborate with The Hanoi Foodstuff and Food Trading Joint Stock Company to supply my agricultural products.")
                         .photographicEvidenceUrl("https://maynongnghiepbinhminh.com/wp-content/uploads/2022/08/de-an-co.jpg")
                         .status("PENDING")
                         .collab(collab2)
