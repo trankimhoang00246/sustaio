@@ -6,8 +6,13 @@
 ## Run the project 
 1. Clone the project
 2. Create database gdsc2024 by postgresql 
+```sql 
+CREATE DATABASE gdsc2024;
+```
 3. Open project by Intellij IDEA
-4. Edit file /resources/application-dev.yml flow environment postgresql in your computer
+4. Choose java version 17 in intellij
+file -> project structure -> project -> sdk -> 17
+5. Edit file /resources/application-dev.yml flow environment postgresql in your computer
 ```yaml
 server:
   port: 8082 #post app
@@ -18,8 +23,8 @@ spring:
     username: postgres #username database
     password: 123 #password database
 ```
-5. Run the project
-6. Open browser and access to http://localhost:8082/swagger-ui/index.html
+6. Run the project
+7. Open browser and access to http://localhost:8082/swagger-ui/index.html
 Account login:
 ```json
 {
