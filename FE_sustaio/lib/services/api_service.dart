@@ -1,8 +1,7 @@
 import 'dart:convert';
+import 'package:gdsc_2024/services/global.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-const String baseUrl = "http://10.0.2.2:8082";
 
 class ApiService {
   Future<bool> loginUser(String username, String password) async {
@@ -48,9 +47,9 @@ Future<void> saveToken(String responseBody) async {
   } catch (e) {
     print("Exception while saving token: $e");
   }
+}
 
-  Future<String?> getSavedToken() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('access_token');
-  }
+Future<String?> getSavedToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('access_token');
 }

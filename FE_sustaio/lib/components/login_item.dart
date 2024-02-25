@@ -83,36 +83,35 @@ class _LoginItemState extends State<LoginItem> {
   }
 
   Widget _buildButton() {
-    return Container(
-      height: 0.06 * deviceHeight,
-      width: 0.76 * deviceWidth,
-      decoration: const BoxDecoration(
-        color: AppStyles.primaryColor1,
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
+    return GestureDetector(
+      onTap: () async {
+        String username = usernameController.text;
+        String password = passwordController.text;
+
+        bool loginSuccess = await ApiService().loginUser(username, password);
+
+        if (loginSuccess) {
+          print('Login success');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeBackground(),
+            ),
+          );
+        } else {
+          print('Login failed');
+        }
+      },
+      child: Container(
+        height: 0.06 * deviceHeight,
+        width: 0.76 * deviceWidth,
+        decoration: const BoxDecoration(
+          color: AppStyles.primaryColor1,
+          borderRadius: BorderRadius.all(
+            Radius.circular(15),
+          ),
         ),
-      ),
-      child: Center(
-        child: GestureDetector(
-          onTap: () async {
-            String username = usernameController.text;
-            String password = passwordController.text;
-
-            bool loginSuccess =
-                await ApiService().loginUser(username, password);
-
-            if (loginSuccess) {
-              print('Login success');
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomeBackground(),
-                ),
-              );
-            } else {
-              print('Login failed');
-            }
-          },
+        child: Center(
           child: Text(
             "Sign in",
             style: TextStyle(
@@ -125,6 +124,7 @@ class _LoginItemState extends State<LoginItem> {
       ),
     );
   }
+
 
   Widget _buildRowSupport() {
     return Container(

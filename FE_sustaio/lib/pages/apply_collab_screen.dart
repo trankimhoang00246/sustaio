@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gdsc_2024/model/collab_form.dart';
+import 'package:gdsc_2024/services/collab_request_service.dart';
 import 'package:gdsc_2024/utils/app_styles.dart';
 
 class ApllyCollabScreen extends StatefulWidget {
@@ -25,6 +26,11 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    PageController _pageController = PageController();
+    int _currentPage = 0;
+
+    GlobalKey<FormState> _firstFormKey = GlobalKey<FormState>();
+    GlobalKey<FormState> _secondFormKey = GlobalKey<FormState>();
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -38,7 +44,7 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
             ],
           ),
           Material(
-            elevation: 5,
+            elevation: 10,
             child: Container(
               width: deviceWidth,
               height: 0.75 * deviceHeight,
@@ -47,7 +53,19 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
                   top: Radius.circular(20),
                 ),
               ),
-              child: _buildSecond(),
+              child: PageView(
+                controller: _pageController,
+                // physics: NeverScrollableScrollPhysics(),
+                onPageChanged: (int page) {
+                  setState(() {
+                    _currentPage = page;
+                  });
+                },
+                children: [
+                  _buildFirst(),
+                  _buildSecond(),
+                ],
+              ),
             ),
           ),
         ],
@@ -101,16 +119,21 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
     );
   }
 
-  Widget _buildDescField(TextEditingController controller, String name) {
+  Widget _buildDescField(TextEditingController controller, String labelText) {
     return Container(
       width: 293,
-      height: 210,
+      height: 212,
       child: Align(
-        alignment: Alignment.topRight,
-        child: TextField(
-          controller: controller,
-          maxLines: 15,
-          decoration: InputDecoration(),
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Mô tả'),
+            TextField(
+              controller: controller,
+              maxLines: 7,
+            ),
+          ],
         ),
       ),
     );
@@ -124,7 +147,9 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
         alignment: Alignment.center,
         child: TextField(
           controller: controller,
-          decoration: InputDecoration(),
+          decoration: InputDecoration(
+            labelText: labelText,
+          ),
         ),
       ),
     );
@@ -212,7 +237,7 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
                 children: [
                   Container(
                     margin: EdgeInsets.all(20),
-                    child: _buildFormDetail(),
+                    child: _buildFormBasic(),
                   ),
                 ],
               ),
@@ -267,5 +292,46 @@ class _ApllyCollabScreenState extends State<ApllyCollabScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildButtonToNext(
+    GlobalKey<FormState> formKey,
+    PageController pageController,
+  ) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 20),
+      child: ElevatedButton(
+        onPressed: () {
+          // if (formKey.currentState!.validate()) {
+          //   pageController.nextPage(
+          //     duration: Duration(milliseconds: 300),
+          //     curve: Curves.easeInOut,
+          //   );
+          // }
+          _submitForm();
+        },
+        child: Text(
+          'Next',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _submitForm() async {
+    // Prepare your data for the API request
+    Map<String, dynamic> requestData = {
+      "fullName": nameController.text,
+      "email": emailController.text,
+      "phone": phonenumberController.text,
+      "address": addressController.text,
+      "description": describtionController.text,
+      "photographicEvidenceUrl":
+          'https://maynongnghiepbinhminh.com/wp-content/uploads/2022/08/de-an-co.jpg',
+      "collabId": widget.collab.id
+    };
+
+    // Call the API using the provided function
+    await CollabRequestService().postCollabRequest(requestData);
   }
 }

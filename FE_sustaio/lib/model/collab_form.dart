@@ -24,6 +24,19 @@ class Collab {
     required this.categoryDto,
     required this.userDto,
   });
+   factory Collab.fromJson(Map<String, dynamic> json) {
+    return Collab(
+      id: json['id'],
+      content: json['content'],
+      otherContent: json['otherContent'],
+      descEnterprise: json['descEnterprise'],
+      address: json['address'],
+      verified: json['verified'],
+      coverImageUrl: json['coverImageUrl'],
+      categoryDto: Category.fromJson(json['categoryDto']),
+      userDto: User.fromJson(json['userDto']),
+    );
+  }
 }
 
 

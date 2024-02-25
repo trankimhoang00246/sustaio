@@ -72,7 +72,7 @@ class CollabCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            collabCard.content,
+            collabCard.userDto.name,
             style: AppStyles.Label,
             maxLines: 2, // Set your desired maximum number of lines
             overflow: TextOverflow.ellipsis, // Specify how to handle overflow
@@ -80,19 +80,34 @@ class CollabCard extends StatelessWidget {
           Row(
             children: [
               Image.asset('assets/icons/discount.png'),
-              Text(collabCard.userDto.categoryAccount, style: AppStyles.Body2),
+              Text(
+                collabCard.userDto.categoryAccount,
+                style: AppStyles.Body2,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ),
           Row(
             children: [
               Image.asset('assets/icons/Group.png'),
-              Text(collabCard.categoryDto.name, style: AppStyles.Body2),
+              Text(
+                collabCard.categoryDto.name,
+                style: AppStyles.Body2,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ),
           Row(
             children: [
               Image.asset('assets/icons/location.png'),
-              Text(collabCard.address, style: AppStyles.Body2),
+              Text(
+                collabCard.address,
+                style: AppStyles.Body2,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           ),
         ],
