@@ -42,13 +42,14 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((authentication) ->
                         authentication
-                                .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/error").anonymous()
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/swagger-resources/**").permitAll()
                                 .requestMatchers("/v3/api-ui.html").permitAll()
                                 .requestMatchers("/webjars/**").permitAll()
                                 .requestMatchers("/swagger-ui.html").permitAll()
+                                .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/error").anonymous()
+                                .requestMatchers("/api/v1/admin").hasAuthority("ROLE_ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .cors(cors -> cors
