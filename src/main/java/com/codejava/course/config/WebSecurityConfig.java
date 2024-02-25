@@ -49,7 +49,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/webjars/**").permitAll()
                                 .requestMatchers("/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/error").anonymous()
-                                .requestMatchers("/api/v1/admin").hasAuthority("ROLE_ADMIN")
+                                .requestMatchers("/api/v1/admin/**").hasAnyAuthority("ROLE_ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .cors(cors -> cors
