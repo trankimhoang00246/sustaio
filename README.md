@@ -25,17 +25,17 @@ spring:
 ```
 6. Run the project
 7. Open browser and access to http://localhost:8082/swagger-ui/index.html
-Account login:
+- Account login:
+- Hiện tại chỉ mới tài khoản farmer này có data có data đầy đủ nhất để test
+```json
+{
+  "username": "farmer",
+  "password": "farmer"
+}
+```
 ```json
 {
   "username": "admin",
   "password": "admin"
-}
-
-//or
-
-{
-  "username": "farmer",
-  "password": "farmer"
 }
 ```
