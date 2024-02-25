@@ -11,7 +11,7 @@ CREATE DATABASE gdsc2024;
 ```
 3. Open project by Intellij IDEA
 4. Choose java version 17 in intellij
-file -> project structure -> project -> sdk -> 17
+- file -> project structure -> project -> sdk -> 17
 5. Edit file /resources/application-dev.yml flow environment postgresql in your computer
 ```yaml
 server:
