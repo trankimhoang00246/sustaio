@@ -66,7 +66,7 @@ public class AppConfig {
                             .username("enterprise1")
                             .password(passwordEncoder.encode("enterprise"))
                             .role(enterpriseRole)
-                            .avatarUrl("https://finance.vietstock.vn/image/VSF")
+                            .avatarUrl("https://lennguyenmedia.com/wp-content/uploads/2023/10/Chung-thu-tham-dinh-Thuc-pham-an-toan.jpg")
                             .build());
         }
         if(!userRepository.existsByUsername("enterprise2")) {
