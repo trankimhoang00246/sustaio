@@ -26,7 +26,8 @@ spring:
 6. Run the project
 7. Open browser and access to http://localhost:8082/swagger-ui/index.html
 - Account login:
-- Hiện tại chỉ mới tài khoản farmer này có data đầy đủ nhất để test
+- Currently, only this farmer account has the most complete data to test
+- Now, test API 
 ```json
 {
   "username": "farmer",
