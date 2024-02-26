@@ -7,10 +7,12 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class NotificationMessagingServiceImpl implements NotificationMessagingService {
     private final FirebaseMessaging firebaseMessaging;
 
@@ -29,7 +31,9 @@ public class NotificationMessagingServiceImpl implements NotificationMessagingSe
                 .build();
 
         try {
-            return firebaseMessaging.send(msg);
+            String id = firebaseMessaging.send(msg);
+            log.info("Successfully sent message: " + msg);
+            return id;
         } catch (FirebaseMessagingException e) {
             e.printStackTrace();
             return "Error sending message: " + e.getMessage();
