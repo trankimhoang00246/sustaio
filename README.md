@@ -1,11 +1,11 @@
 # sustaio
-[Team Kìn chá nà - GDSC 2024] Sustaio App 
+[Team Kìn chá nà - GDSC 2024] Sustaio App
 
 ## Project Description
 
-## Run the project 
+## Run the project
 1. Clone the project
-2. Create database gdsc2024 by postgresql 
+2. Create database gdsc2024 by postgresql
 ```sql 
 CREATE DATABASE gdsc2024;
 ```
@@ -27,7 +27,7 @@ spring:
 7. Open browser and access to http://localhost:8082/swagger-ui/index.html
 - Account login:
 - Currently, only this farmer account has the most complete data to test
-- Now, test API 
+- Now, test API
 ```json
 {
   "username": "farmer",

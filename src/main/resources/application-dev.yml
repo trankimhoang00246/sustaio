@@ -38,3 +38,6 @@ app:
     contact-email: trankimhoang1710@gmail.com
     swagger:
       enable: true
+
+firebase:
+  service-account: classpath:firebase-service-account.json
